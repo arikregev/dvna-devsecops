@@ -1,0 +1,24 @@
+kind: Pod
+metadata:
+  name: kaniko
+spec:
+  containers:
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:v1.6.0-debug
+      imagePullPolicy: Always
+      command:
+        - sleep
+      args:
+        - 99d
+      volumeMounts:
+        - name: image-registry-cred-config
+          mountPath: /kaniko/.docker
+  volumes:
+    - name: image-registry-cred-config
+      projected:
+        sources:
+          - secret:
+              name: image-registry-cred
+              items:
+                - key: .dockerconfigjson
+                  path: config.json

@@ -1,0 +1,26 @@
+kind: Pod
+metadata:
+  name: buildah
+  openshift.io/scc: anyuid
+spec:
+  containers:
+    - name: buildah
+      image: quay.io/buildah/stable
+      imagePullPolicy: IfNotPresent
+      command:
+        - sleep
+      args:
+        - 99d
+      volumeMounts:
+        - name: image-registry-cred-config
+          mountPath: /tmp/config.json
+  volumes:
+    - name: image-registry-cred-config
+      projected:
+        sources:
+          - secret:
+              name: image-registry-cred
+              items:
+                - key: .dockerconfigjson
+                  path: config.json        
+  serviceAccountName: buildah-sa

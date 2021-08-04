@@ -1,0 +1,23 @@
+# docker run -d --name sonarqube -p 9000:9000 sonarqube:7.5-community
+kind: Pod
+metadata:
+  name: sonar-scanner
+spec:
+  containers:
+  - name: sonar-scanner
+    image: sonarsource/sonar-scanner-cli
+    imagePullPolicy: IfNotPresent
+    tty: true
+    command: ["/bin/sh"]
+    env:
+      - name: SONAR_HOST_URL
+        valueFrom:
+          configMapKeyRef:
+            name: pipeline-vars
+            key: SONAR_HOST_URL
+      - name: SONAR_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: pipeline-secrets
+            key: SONAR_TOKEN            
+  imagePullSecret: image-registry-cred
