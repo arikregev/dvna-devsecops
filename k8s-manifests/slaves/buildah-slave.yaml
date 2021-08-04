@@ -13,7 +13,7 @@ spec:
         - 99d
       volumeMounts:
         - name: image-registry-cred-config
-          mountPath: /tmp/config.json
+          mountPath: /tmp
   volumes:
     - name: image-registry-cred-config
       projected:
