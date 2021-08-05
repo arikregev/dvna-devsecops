@@ -1,0 +1,11 @@
+# docker run -d --name sonarqube -p 9000:9000 sonarqube:7.5-community
+kind: Pod
+metadata:
+  name: owasp-dependency-checker
+spec:
+  containers:
+  - name: owasp-dependency-checker
+    image: owasp/dependency-check
+    imagePullPolicy: IfNotPresent
+    tty: true
+    command: ["/bin/sh"]
