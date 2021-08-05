@@ -3,21 +3,12 @@
 
 FROM docker.io/node:carbon-slim
 
-WORKDIR /opt
-
-COPY package.json .
-
-RUN npm install
-
 WORKDIR /app
 
-COPY . .
+COPY config core models public routes views package.json server.js node_modules ./
 
 RUN apt-get update && \
-    apt-get install -y iputils-ping
-
-RUN npm install -g nodemon
-
-ENV NODE_PATH=/opt/node_modules
+    apt-get install -y iputils-ping && \
+    npm install -g nodemon
 
 CMD ["npm", "start"]
