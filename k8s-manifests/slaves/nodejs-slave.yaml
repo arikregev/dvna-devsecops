@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: nodejs
-    image: node:carbon-slim
+    image: node:8.17.0-slim
     imagePullPolicy: IfNotPresent
     tty: true
     command: ["/bin/sh"]
