@@ -36,7 +36,12 @@ app.use(require('express-flash')());
 
 // Routing
 app.use('/app',require('./routes/app')())
+app.get("/unit-test", function (req, res) {
+  res.send("Hello World!");
+});
 app.use('/',require('./routes/main')(passport))
+
+
 
 // Start Server
 app.listen(config.port, config.listen)
