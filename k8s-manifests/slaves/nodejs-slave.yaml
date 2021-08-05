@@ -1,0 +1,11 @@
+# docker run -d --name sonarqube -p 9000:9000 sonarqube:7.5-community
+kind: Pod
+metadata:
+  name: nodejs-slave
+spec:
+  containers:
+  - name: nodejs
+    image: node:carbon-slim
+    imagePullPolicy: IfNotPresent
+    tty: true
+    command: ["/bin/sh"]
