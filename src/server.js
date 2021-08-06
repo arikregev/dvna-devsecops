@@ -12,6 +12,7 @@ var app = express()
 require('./core/passport')(passport)
 app.use(express.static('public'))
 app.set('view engine','ejs')
+app.set('views', path.join(__dirname, '/src'))
 app.use(morgan('tiny'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(fileUpload());

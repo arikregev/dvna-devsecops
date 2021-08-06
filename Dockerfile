@@ -5,7 +5,9 @@ FROM docker.io/node:carbon-slim
 
 WORKDIR /app
 
-COPY config core models public routes views server.js package.json ./
+COPY src ./src
+
+COPY package.json ./
 
 RUN apt-get update && \
     apt-get install -y iputils-ping && \
