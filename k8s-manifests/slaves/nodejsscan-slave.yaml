@@ -1,0 +1,12 @@
+kind: Pod
+metadata:
+  name: nodejsscanner
+spec:
+  containers:
+    - name: nodejsscanner
+      image: opensecurity/njsscan
+      imagePullPolicy: IfNotPresent
+      command:
+        - sleep
+      args:
+        - 99d
