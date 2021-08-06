@@ -5,13 +5,11 @@ FROM docker.io/node:carbon-slim
 
 WORKDIR /app
 
-COPY src ./src
-
-COPY package.json ./
+COPY config core models public routes views server.js package.json ./
 
 RUN apt-get update && \
     apt-get install -y iputils-ping && \
-    npm install && \
+    npm install --production && \
     npm install -g nodemon
 
 CMD ["npm", "start"]

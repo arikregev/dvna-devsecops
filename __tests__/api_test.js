@@ -1,5 +1,5 @@
 var request = require("supertest");
-var app = require("../src/server.js");
+var app = require("../server.js");
 
 describe("GET /unit-test", function () {
   it("respond with hello world", async function (done) {
