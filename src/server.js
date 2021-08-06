@@ -4,6 +4,7 @@ var passport = require('passport')
 var session = require('express-session')
 var ejs = require('ejs')
 var morgan = require('morgan')
+var path = require('path');
 const fileUpload = require('express-fileupload');
 var config = require('./config/server')
 
@@ -12,7 +13,7 @@ var app = express()
 require('./core/passport')(passport)
 app.use(express.static('public'))
 app.set('view engine','ejs')
-app.set('views', path.join(__dirname, '/src'))
+app.set('views', path.join(__dirname, '/views'))
 app.use(morgan('tiny'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(fileUpload());
