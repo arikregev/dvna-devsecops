@@ -1,0 +1,11 @@
+# docker run -d --name sonarqube -p 9000:9000 sonarqube:7.5-community
+kind: Pod
+metadata:
+  name: trivy-scanner
+spec:
+  containers:
+  - name: trivy-scanner
+    image: aquasec/trivy:0.19.2
+    imagePullPolicy: IfNotPresent
+    tty: true
+    command: ["/bin/sh"]
