@@ -1,3 +1,3 @@
 @Library('nodejs-jenkins-pipeline-shared-library') _
 
-buildAndDeployApp(this)
+buildAndDeployApp("${ARCHERYSEC_HOST_URL}")
