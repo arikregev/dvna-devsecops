@@ -18,6 +18,7 @@ SONAR_HOST_URL: 'http://sonarqube-devops-tools.apps.cluster-2e28.sandbox1805.ope
 DOCKER_REGISTRY_URL: 'https://index.docker.io/v2/'
 ARCHERYSEC_HOST_URL: 'http://archerysec-devops-tools.apps.cluster-2e28.sandbox1805.opentlc.com'
 ARCHERYSEC_PROJECT_ID: 'c77238e9-97eb-4f46-9f59-d32190046b08'
+KUBERNETES_CLUSTER_URL: 'https://api.cluster-2e28.sandbox1805.opentlc.com:6443'
 
 ######################################################################################################
 # Application Specific Data
