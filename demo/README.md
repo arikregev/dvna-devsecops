@@ -3,6 +3,7 @@
 - Jenkins Server
 - SonarQube Server
 - [OWASP Dependency-Check Plugin](https://plugins.jenkins.io/dependency-check-jenkins-plugin) installed in Jenkins
+- [Kubernetes CLI Plugin](https://plugins.jenkins.io/kubernetes-cli/) installed in Jenkins
 - To build images using Buildah, you need to create one service account and you need to assign it the ability to run as the standard anyuid [SCC](https://docs.openshift.com/container-platform/4.3/authentication/managing-security-context-constraints.html) (See setup below)
 - You need authentication to kubernetes cluster (See setup below)
 - You need authentication to publish scan reports to SonarQube (See setup below)
