@@ -22,7 +22,9 @@ $ oc adm policy add-scc-to-user anyuid -z buildah-sa
 
 #### Kubernetes Cluster Authentication
 
-###### Generating Kubernetes credentials
+##### Generating Kubernetes credentials
+
+###### Kubernetes Setup
 
 The following example describes how you could use the token of a ServiceAccount to access the Kubernetes cluster from Jenkins. The result depends of course on the permissions you have.
 
@@ -45,6 +47,18 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2V[...]
 ```
 
 On Jenkins, navigate in the folder you want to add the token in, or go on the main page. Then click on the "Credentials" item in the left menu and find or create the "Domain" you want. Finally, paste your token into a Secret text credential. The ID is the credentialsId you need to use in the plugin configuration.
+
+###### OpenShift Setup
+
+Complete kubernetes setup and add below permission to jenkins-robot account
+
+```
+$ oc policy add-role-to-user admin system:serviceaccount:<namespace>:jenkins-robot -n <staging_namespace>
+$ oc policy add-role-to-user edit system:serviceaccount:<namespace>:jenkins-robot -n <staging_namespace>
+
+$ oc policy add-role-to-user admin system:serviceaccount:<namespace>:jenkins-robot -n <prod_namespace>
+$ oc policy add-role-to-user edit system:serviceaccount:<namespace>:jenkins-robot -n <prod_namespace>
+```
 
 #### Authentication
 
