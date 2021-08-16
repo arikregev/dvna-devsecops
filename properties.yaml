@@ -1,1 +1,28 @@
+######################################################################################################
+# Slave File Paths
+######################################################################################################
+
+NODEJS_SLAVE_YAML: 'k8s-manifests/slaves/nodejs-slave.yaml'
+NODEJSSCAN_SLAVE_YAML: 'k8s-manifests/slaves/nodejsscan-slave.yaml'
+OWASP_DEPENDENCY_CHECK_SLAVE_YAML: 'k8s-manifests/slaves/owasp-dependency-check-slave.yaml'
+SONAR_SCANNER_SLAVE_YAML: 'k8s-manifests/slaves/sonar-scanner-slave.yaml'
+BUILDAH_SLAVE_YAML: 'k8s-manifests/slaves/buildah-slave.yaml'
+TRIVY_SLAVE_YAML: 'k8s-manifests/slaves/trivy-slave.yaml'
+ARCHERYSEC_SLAVE_YAML: 'k8s-manifests/slaves/archerysec-slave.yaml'
+
+######################################################################################################
+# Tool Specific Data
+######################################################################################################
+
+SONAR_HOST_URL: 'https://sonarqube-devops-tools.apps.cluster-2e28.sandbox1805.opentlc.com'
+DOCKER_REGISTRY_URL: 'https://index.docker.io/v2/'
 ARCHERYSEC_HOST_URL: 'http://archerysec-devops-tools.apps.cluster-2e28.sandbox1805.opentlc.com'
+ARCHERYSEC_PROJECT_ID: 'c77238e9-97eb-4f46-9f59-d32190046b08'
+
+######################################################################################################
+# Application Specific Data
+######################################################################################################
+
+APP_NAME: 'dvna-devsecops'
+PACKAGE_JSON_PATH: './package.json'
+DOCKERFILE_PATH: './Dockerfile'

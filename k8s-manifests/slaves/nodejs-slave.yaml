@@ -1,0 +1,12 @@
+kind: Pod
+metadata:
+  name: nodejs
+spec:
+  containers:
+    - name: nodejs
+      image: quay.io/openshift/origin-jenkins-agent-nodejs
+      imagePullPolicy: IfNotPresent
+      command:
+        - sleep
+      args:
+        - 99d   

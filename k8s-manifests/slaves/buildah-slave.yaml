@@ -11,16 +11,16 @@ spec:
         - sleep
       args:
         - 99d
-      volumeMounts:
-        - name: image-registry-cred-config
-          mountPath: /tmp
-  volumes:
-    - name: image-registry-cred-config
-      projected:
-        sources:
-          - secret:
-              name: image-registry-cred
-              items:
-                - key: .dockerconfigjson
-                  path: config.json        
+  #     volumeMounts:
+  #       - name: image-registry-cred-config
+  #         mountPath: /tmp
+  # volumes:
+  #   - name: image-registry-cred-config
+  #     projected:
+  #       sources:
+  #         - secret:
+  #             name: image-registry-cred
+  #             items:
+  #               - key: .dockerconfigjson
+  #                 path: config.json        
   serviceAccountName: buildah-sa

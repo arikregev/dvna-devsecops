@@ -9,20 +9,4 @@ spec:
       command:
         - sleep
       args:
-        - 99d
-      env:
-        - name: ARCHERYSEC_HOST_URL
-          valueFrom:
-            configMapKeyRef:
-              name: pipeline-vars
-              key: ARCHERYSEC_HOST_URL
-        - name: ARCHERYSEC_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: pipeline-secrets
-              key: ARCHERYSEC_USERNAME    
-        - name: ARCHERYSEC_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: pipeline-secrets
-              key: ARCHERYSEC_PASSWORD                    
+        - 99d                   
