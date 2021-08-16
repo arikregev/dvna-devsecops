@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+    name: dvna-devsecops
+spec:
+    scaleTargetRef:
+        apiVersion: apps/v1beta1
+        kind: Deployment
+        name: dvna-devsecops
+    minReplicas: 1
+    maxReplicas: 2
+    targetCPUUtilizationPercentage: 75
