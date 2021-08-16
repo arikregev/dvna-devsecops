@@ -19,7 +19,7 @@ DOCKER_REGISTRY_URL: 'https://index.docker.io/v2/'
 ARCHERYSEC_HOST_URL: 'http://archerysec-devops-tools.apps.cluster-2e28.sandbox1805.opentlc.com'
 ARCHERYSEC_PROJECT_ID: 'c77238e9-97eb-4f46-9f59-d32190046b08'
 KUBERNETES_CLUSTER_URL: 'https://api.cluster-2e28.sandbox1805.opentlc.com:6443'
-DEV_NAMESPACE: 'devops-tools'
+STAGING_NAMESPACE: 'test-env'
 
 ######################################################################################################
 # Application Specific Data
@@ -28,3 +28,4 @@ DEV_NAMESPACE: 'devops-tools'
 APP_NAME: 'dvna-devsecops'
 PACKAGE_JSON_PATH: './package.json'
 DOCKERFILE_PATH: './Dockerfile'
+KUSTOMIZATION_DIRECTORY: './k8s-manifests/'
