@@ -14,7 +14,7 @@ ARCHERYSEC_SLAVE_YAML: 'k8s-manifests/slaves/archerysec-slave.yaml'
 # Tool Specific Data
 ######################################################################################################
 
-SONAR_HOST_URL: 'https://sonarqube-devops-tools.apps.cluster-2e28.sandbox1805.opentlc.com'
+SONAR_HOST_URL: 'http://sonarqube-devops-tools.apps.cluster-2e28.sandbox1805.opentlc.com'
 DOCKER_REGISTRY_URL: 'https://index.docker.io/v2/'
 ARCHERYSEC_HOST_URL: 'http://archerysec-devops-tools.apps.cluster-2e28.sandbox1805.opentlc.com'
 ARCHERYSEC_PROJECT_ID: 'c77238e9-97eb-4f46-9f59-d32190046b08'
