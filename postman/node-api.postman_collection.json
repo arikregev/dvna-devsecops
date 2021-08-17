@@ -59,7 +59,7 @@
 	"variable": [
 		{
 			"key": "api_url",
-			"value": "http://dvna-devsecops-test-env.apps.cluster-2e28.sandbox1805.opentlc.com"
+			"value": "APP_STAGING_TARGET_URL"
 		}
 	]
 }

@@ -22,7 +22,7 @@ ARCHERYSEC_HOST_URL: 'http://archerysec-devops-tools.apps.cluster-2e28.sandbox18
 ARCHERYSEC_PROJECT_ID: 'c77238e9-97eb-4f46-9f59-d32190046b08'
 KUBERNETES_CLUSTER_URL: 'https://api.cluster-2e28.sandbox1805.opentlc.com:6443'
 STAGING_NAMESPACE: 'test-env'
-ARTILLERY_STAGING_TARGET_URL: 'http://dvna-devsecops-test-env.apps.cluster-2e28.sandbox1805.opentlc.com'
+APP_STAGING_TARGET_URL: 'http://dvna-devsecops-test-env.apps.cluster-2e28.sandbox1805.opentlc.com'
 
 ######################################################################################################
 # Application Specific Data
