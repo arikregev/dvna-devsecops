@@ -59,7 +59,7 @@
 	"variable": [
 		{
 			"key": "api_url",
-			"value": "APP_STAGING_TARGET_URL"
+			"value": "http://APP_STAGING_TARGET_URL"
 		}
 	]
 }
