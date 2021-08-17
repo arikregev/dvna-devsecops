@@ -4,7 +4,7 @@ metadata:
 spec:
   containers:
     - name: artillery
-      image: artilleryio/artillery
+      image: quaddo/artillery
       imagePullPolicy: IfNotPresent
       command:
         - sleep
