@@ -65,3 +65,10 @@ $ oc policy add-role-to-user edit system:serviceaccount:<namespace>:jenkins-robo
 Create credentials in Jenkins as shown in below image:
 
 <img src="./creds.PNG">
+
+### Note
+
+- If Artillery report is not displayed correctly in Jenkins, then run below script in Script Console in Manage Jenkins page
+```
+System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
+```
