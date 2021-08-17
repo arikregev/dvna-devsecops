@@ -1,0 +1,16 @@
+config:
+  environments:
+    staging:
+      target: 'STAGING_URL'
+      phases:
+        - duration: 5
+          arrivalRate: 5
+    production:
+      target: 'PRODUCTION_URL'
+      phases:
+        - duration: 10
+          arrivalRate: 10
+scenarios:
+  - flow:
+    - get:
+        url: "/"

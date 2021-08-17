@@ -1,0 +1,12 @@
+kind: Pod
+metadata:
+  name: artillery
+spec:
+  containers:
+    - name: artillery
+      image: artilleryio/artillery
+      imagePullPolicy: IfNotPresent
+      command:
+        - sleep
+      args:
+        - 99d                   

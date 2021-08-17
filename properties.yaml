@@ -9,6 +9,7 @@ SONAR_SCANNER_SLAVE_YAML: 'k8s-manifests/slaves/sonar-scanner-slave.yaml'
 BUILDAH_SLAVE_YAML: 'k8s-manifests/slaves/buildah-slave.yaml'
 TRIVY_SLAVE_YAML: 'k8s-manifests/slaves/trivy-slave.yaml'
 ARCHERYSEC_SLAVE_YAML: 'k8s-manifests/slaves/archerysec-slave.yaml'
+ARTILLERY_SLAVE_YAML: 'k8s-manifests/slaves/artillery-slave.yaml'
 
 ######################################################################################################
 # Tool Specific Data
@@ -20,6 +21,7 @@ ARCHERYSEC_HOST_URL: 'http://archerysec-devops-tools.apps.cluster-2e28.sandbox18
 ARCHERYSEC_PROJECT_ID: 'c77238e9-97eb-4f46-9f59-d32190046b08'
 KUBERNETES_CLUSTER_URL: 'https://api.cluster-2e28.sandbox1805.opentlc.com:6443'
 STAGING_NAMESPACE: 'test-env'
+APP_DOMAIN: 'apps.cluster-2e28.sandbox1805.opentlc.com'
 
 ######################################################################################################
 # Application Specific Data
@@ -29,3 +31,4 @@ APP_NAME: 'dvna-devsecops'
 PACKAGE_JSON_PATH: './package.json'
 DOCKERFILE_PATH: './Dockerfile'
 KUSTOMIZATION_DIRECTORY: './k8s-manifests/'
+ARTILLERY_CONFIG_FILE_PATH: './__tests__/artillery_config.yml'
