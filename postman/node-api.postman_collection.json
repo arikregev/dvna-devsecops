@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Request is successful with a status code of 200\", function () {\r",
-							"  pm.response.to.have.status(200);\r",
+							"  pm.response.to.have.status(300);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -59,7 +59,7 @@
 	"variable": [
 		{
 			"key": "api_url",
-			"value": "http://APP_STAGING_TARGET_URL"
+			"value": "http://APP_URL"
 		}
 	]
 }
