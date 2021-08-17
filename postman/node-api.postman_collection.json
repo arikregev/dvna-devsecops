@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Request is successful with a status code of 200\", function () {\r",
-							"  pm.response.to.have.status(300);\r",
+							"  pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
