@@ -1,0 +1,12 @@
+kind: Pod
+metadata:
+  name: newman
+spec:
+  containers:
+    - name: newman
+      image: postman/newman
+      imagePullPolicy: IfNotPresent
+      command:
+        - sleep
+      args:
+        - 99d                   
