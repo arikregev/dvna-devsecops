@@ -1,0 +1,19 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dvna-devsecops
+spec:
+  template:
+    metadata:
+      labels:
+        app: dvna-devsecops
+    spec:
+      containers:
+        - name: dvna-devsecops
+          resources:
+            limits:
+              cpu: 800m
+              memory: 1024Mi
+            requests:
+              cpu: 400m
+              memory: 512Mi

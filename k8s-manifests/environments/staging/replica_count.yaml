@@ -1,0 +1,6 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dvna-devsecops
+spec:
+  replicas: 2

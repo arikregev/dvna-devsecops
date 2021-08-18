@@ -1,0 +1,8 @@
+bases:
+  - ../../application
+patches:
+  - replica_count.yaml
+  - resource_limits.yaml
+images:
+- name: sourabh385/IMAGE_NAME
+  newTag: IMAGE_TAG

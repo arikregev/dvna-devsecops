@@ -1,5 +1,0 @@
-resources:
-  - application/autoscaler.yaml
-  - application/deployment.yaml
-  - application/route.yaml
-  - application/service.yaml

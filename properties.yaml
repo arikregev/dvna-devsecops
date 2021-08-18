@@ -32,6 +32,7 @@ APP_STAGING_TARGET_URL: 'dvna-devsecops-test-env.apps.cluster-2e28.sandbox1805.o
 APP_NAME: 'dvna-devsecops'
 PACKAGE_JSON_PATH: './package.json'
 DOCKERFILE_PATH: './Dockerfile'
-KUSTOMIZATION_DIRECTORY: './k8s-manifests/'
+STAGING_KUSTOMIZATION_DIRECTORY: './k8s-manifests/environments/staging'
+PRODUCTION_KUSTOMIZATION_DIRECTORY: './k8s-manifests/environments/production'
 POSTMAN_COLLECTION_FILE_PATH: './postman/node-api.postman_collection.json'
 ARTILLERY_CONFIG_FILE_PATH: './__tests__/artillery_config.yml'
