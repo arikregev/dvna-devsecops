@@ -9,5 +9,11 @@ spec:
       command:
         - sleep
       args:
-        - 99d                   
+        - 99d      
+      volumeMounts:
+        - mountPath: "/zap/wrk"
+          name: "workspace-volume"             
   serviceAccountName: buildah-sa
+  volumes:
+  - name: "workspace-volume"
+    emptyDir: {}
