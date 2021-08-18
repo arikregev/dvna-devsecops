@@ -5,4 +5,4 @@ patches:
   - resource_limits.yaml
 images:
 - name: sourabh385/IMAGE_NAME
-  newTag: IMAGE_TAG
+  newTag: 'IMAGE_TAG'
