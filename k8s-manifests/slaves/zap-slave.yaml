@@ -1,0 +1,12 @@
+kind: Pod
+metadata:
+  name: zap
+spec:
+  containers:
+    - name: zap
+      image: owasp/zap2docker-stable
+      imagePullPolicy: IfNotPresent
+      command:
+        - sleep
+      args:
+        - 99d                   
