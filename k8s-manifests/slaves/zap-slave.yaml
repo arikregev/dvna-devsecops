@@ -4,7 +4,7 @@ metadata:
 spec:
   containers:
     - name: zap
-      image: owasp/zap2docker-stable
+      image: franbuehler/jenkins-agent-zap
       imagePullPolicy: IfNotPresent
       command:
         - sleep
