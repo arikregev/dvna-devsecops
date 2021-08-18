@@ -11,6 +11,7 @@ TRIVY_SLAVE_YAML: 'k8s-manifests/slaves/trivy-slave.yaml'
 ARCHERYSEC_SLAVE_YAML: 'k8s-manifests/slaves/archerysec-slave.yaml'
 NEWMAN_SLAVE_YAML: 'k8s-manifests/slaves/newman-slave.yaml'
 ARTILLERY_SLAVE_YAML: 'k8s-manifests/slaves/artillery-slave.yaml'
+ZAP_SLAVE_YAML: 'k8s-manifests/slaves/zap-slave.yaml'
 
 ######################################################################################################
 # Tool Specific Data
