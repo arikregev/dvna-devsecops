@@ -24,7 +24,7 @@ pipeline {
             steps {
                 container('nodejs') {
                     script {
-                        unitTestingAndCodeCoverageUsingJest
+                        unitTestingAndCodeCoverageUsingJest()
                     }
                 }
             }    
