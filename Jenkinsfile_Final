@@ -1,0 +1,35 @@
+@Library('nodejs-jenkins-pipeline-shared-library') _
+
+pipeline {
+    agent none
+
+    stages {
+        stage('Read Properties') {
+            agent any
+
+            steps {
+                script {
+                    properties = readYaml file: "properties.yaml"
+                }
+            }
+        }
+
+        stage('Unit Testing & Code Coverage') {
+            agent {
+                kubernetes {
+                    yamlFile "${properties.NODEJS_SLAVE_YAML}"
+                }
+            }
+
+            steps {
+                container('nodejs') {
+                    script {
+                        unitTestingAndCodeCoverageUsingJest()
+                    }
+                    stash includes: 'coverage/*', name: 'coverage-report' 
+                    stash includes: 'node_modules/', name: 'node_modules' 
+                }
+            }    
+        }
+    }
+}

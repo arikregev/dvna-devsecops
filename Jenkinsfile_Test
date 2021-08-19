@@ -14,20 +14,42 @@ pipeline {
             }
         }
 
-        stage('Unit Testing & Code Coverage') {
-            agent {
-                kubernetes {
-                    yamlFile "${properties.NODEJS_SLAVE_YAML}"
-                }
-            }
-
-            steps {
-                container('nodejs') {
-                    script {
-                        unitTestingAndCodeCoverageUsingJest()
+        stage('Security Testing'){
+            parallel {
+                stage('Static Application Security Testing') {
+                    agent {
+                        kubernetes {
+                            yamlFile "${properties.NODEJSSCAN_SLAVE_YAML}"
+                        }
+                    }
+                    
+                    steps {
+                        container('nodejsscanner') {
+                            script {
+                                sastUsingNodeJsScan()
+                            }
+                        }
                     }
                 }
-            }    
+
+                stage('Software Composition Analysis') {
+                    agent {
+                        kubernetes {
+                            yamlFile "${properties.OWASP_DEPENDENCY_CHECK_SLAVE_YAML}"
+                        }
+                    }
+                    
+                    steps {
+                        container('owasp-dependency-checker') {
+                            unstash 'node_modules'
+                            script {
+                                scaUsingOwaspDependencyCheck('DVNA', ${properties.PACKAGE_JSON_PATH})
+                            }
+                            stash includes: "dependency-check-report.xml,dependency-check-report.json,dependency-check-report.html", name: 'owasp-reports'
+                        }
+                    }
+                }
+            }
         }
     }
 }
