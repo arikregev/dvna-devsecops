@@ -41,7 +41,7 @@ pipeline {
                     
                     steps {
                         container('owasp-dependency-checker') {
-                            unstash 'node_modules'
+                            // unstash 'node_modules'
                             script {
                                 scaUsingOwaspDependencyCheck('DVNA', ${properties.PACKAGE_JSON_PATH})
                             }
