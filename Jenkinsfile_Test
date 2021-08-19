@@ -14,22 +14,23 @@ pipeline {
             }
         }
 
-                stage('Software Composition Analysis') {
-                    agent {
-                        kubernetes {
-                            yamlFile "${properties.OWASP_DEPENDENCY_CHECK_SLAVE_YAML}"
-                        }
-                    }
-                    
-                    steps {
-                        container('owasp-dependency-checker') {
-                            // unstash 'node_modules'
-                            script {
-                                scaUsingOwaspDependencyCheck('DVNA', "${properties.PACKAGE_JSON_PATH}")
-                            }
-                            stash includes: "dependency-check-report.xml,dependency-check-report.json,dependency-check-report.html", name: 'owasp-reports'
+        stage('Code Quality Analysis') {
+            agent {
+                kubernetes {
+                    yamlFile "${properties.SONAR_SCANNER_SLAVE_YAML}"
+                }
+            }
+            steps {
+                container('sonar-scanner') {
+                    withCredentials([usernamePassword(credentialsId: 'sonarqube-creds', usernameVariable: 'SONAR_USERNAME', passwordVariable: 'SONAR_PASSWORD')]) {
+                        unstash 'coverage-report'
+                        unstash 'owasp-reports'
+                        script {
+                            codeQualityCheckUsingSonarQube("${properties.SONAR_HOST_URL}", "${SONAR_PASSWORD}")
                         }
                     }
                 }
+            }
+        }
     }
 }
