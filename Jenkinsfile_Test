@@ -14,24 +14,6 @@ pipeline {
             }
         }
 
-        stage('Security Testing'){
-            parallel {
-                stage('Static Application Security Testing') {
-                    agent {
-                        kubernetes {
-                            yamlFile "${properties.NODEJSSCAN_SLAVE_YAML}"
-                        }
-                    }
-                    
-                    steps {
-                        container('nodejsscanner') {
-                            script {
-                                sastUsingNodeJsScan()
-                            }
-                        }
-                    }
-                }
-
                 stage('Software Composition Analysis') {
                     agent {
                         kubernetes {
@@ -43,13 +25,11 @@ pipeline {
                         container('owasp-dependency-checker') {
                             // unstash 'node_modules'
                             script {
-                                scaUsingOwaspDependencyCheck('DVNA', ${properties.PACKAGE_JSON_PATH})
+                                scaUsingOwaspDependencyCheck('DVNA', "${properties.PACKAGE_JSON_PATH}")
                             }
                             stash includes: "dependency-check-report.xml,dependency-check-report.json,dependency-check-report.html", name: 'owasp-reports'
                         }
                     }
                 }
-            }
-        }
     }
 }

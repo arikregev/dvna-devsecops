@@ -31,5 +31,25 @@ pipeline {
                 }
             }    
         }
+
+        stage('Security Testing'){
+            parallel {
+                stage('Static Application Security Testing') {
+                    agent {
+                        kubernetes {
+                            yamlFile "${properties.NODEJSSCAN_SLAVE_YAML}"
+                        }
+                    }
+                    
+                    steps {
+                        container('nodejsscanner') {
+                            script {
+                                sastUsingNodeJsScan()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
