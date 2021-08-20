@@ -1,3 +1,9 @@
+## DevSecOps Pipeline Demo
+
+Jenkins pipeline implementation in this repository:
+
+<img src="./devsecops-pipeline.PNG">
+
 ## Demo Pre-Requisites
 
 - Jenkins Server
