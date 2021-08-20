@@ -142,5 +142,59 @@ pipeline {
                 }
             }
         } 
+
+        stage('Deploy App in Staging') {
+            agent any
+
+            steps {
+                withKubeConfig([credentialsId: 'k8s-cluster-creds', serverUrl: "${properties.KUBERNETES_CLUSTER_URL}"]) {
+                    sh "sed -i 's/IMAGE_NAME/${properties.APP_NAME}/g' ${properties.STAGING_KUSTOMIZATION_DIRECTORY}/kustomization.yaml"
+                    sh "sed -i 's/IMAGE_TAG/${BUILD_NUMBER}/g' ${properties.STAGING_KUSTOMIZATION_DIRECTORY}/kustomization.yaml"
+                    script {
+                        deployUsingKustomize("${properties.STAGING_NAMESPACE}", "${properties.STAGING_KUSTOMIZATION_DIRECTORY}")
+                    }
+                }
+            }
+        }
+
+        stage('Dynamic Application Security Testing') {
+            agent {
+                kubernetes {
+                    yamlFile "${properties.ZAP_SLAVE_YAML}"
+                }
+            }
+            steps {
+                container('zap') {
+                    script {
+                        dastUsingZap("http://${properties.APP_STAGING_TARGET_URL}")
+                    }   
+                    stash includes: 'zap-report.xml', name: 'zap-report'                        
+                }
+            }
+        }
+
+        stage('Publish Reports to ArcherySec') {
+            agent {
+                kubernetes {
+                    yamlFile "${properties.ARCHERYSEC_SLAVE_YAML}"
+                }
+            }
+            steps {
+                container('archerysec-cli') {
+                    withCredentials([usernamePassword(credentialsId: 'archerysec-creds', usernameVariable: 'ARCHERYSEC_USERNAME', passwordVariable: 'ARCHERYSEC_PASSWORD')]) {
+                        unstash 'owasp-reports'
+                        unstash 'trivy-report' 
+                        unstash 'zap-report'
+                        script {
+                            publishReportToArcherySec("${properties.ARCHERYSEC_HOST_URL}", "${ARCHERYSEC_USERNAME}", "${ARCHERYSEC_PASSWORD}", "XML", "dependency-check-report.xml", "DVNA_OWASP", "dependencycheck", "${properties.ARCHERYSEC_PROJECT_ID}")
+                            
+                            publishReportToArcherySec("${properties.ARCHERYSEC_HOST_URL}", "${ARCHERYSEC_USERNAME}", "${ARCHERYSEC_PASSWORD}", "JSON", "trivy-report.json", "DVNA_TRIVY", "trivy", "${properties.ARCHERYSEC_PROJECT_ID}")
+                            
+                            publishReportToArcherySec("${properties.ARCHERYSEC_HOST_URL}", "${ARCHERYSEC_USERNAME}", "${ARCHERYSEC_PASSWORD}", "XML", "zap-report.xml", "DVNA_ZAP", "zap_scan", "${properties.ARCHERYSEC_PROJECT_ID}")
+                        }
+                    }    
+                }
+            }
+        }
     }
 }
