@@ -157,6 +157,23 @@ pipeline {
             }
         }
 
+        stage('Functional Testing') {
+            agent {
+                kubernetes {
+                    yamlFile "${properties.NEWMAN_SLAVE_YAML}"
+                }
+            }
+            steps {
+                container('newman') {
+                    sh "sed -i 's/APP_URL/${properties.APP_STAGING_TARGET_URL}/g' ${properties.POSTMAN_COLLECTION_FILE_PATH}"
+                    script {
+                        functionalTestingUsingPostmanNewman("${properties.POSTMAN_COLLECTION_FILE_PATH}")
+                    }
+                    junit 'newman-report.xml'
+                }
+            }
+        }
+
         stage('Dynamic Application Security Testing') {
             agent {
                 kubernetes {
@@ -169,6 +186,21 @@ pipeline {
                         dastUsingZap("http://${properties.APP_STAGING_TARGET_URL}")
                     }   
                     stash includes: 'zap-report.xml', name: 'zap-report'                        
+                }
+            }
+        }
+
+        stage('Load Testing') {
+            agent {
+                kubernetes {
+                    yamlFile "${properties.ARTILLERY_SLAVE_YAML}"
+                }
+            }
+            steps {
+                container('artillery') {
+                    script {
+                        loadTestingUsingArtillery("staging", "http://${properties.APP_STAGING_TARGET_URL}", "${properties.ARTILLERY_CONFIG_FILE_PATH}")
+                    }
                 }
             }
         }
@@ -193,6 +225,20 @@ pipeline {
                             publishReportToArcherySec("${properties.ARCHERYSEC_HOST_URL}", "${ARCHERYSEC_USERNAME}", "${ARCHERYSEC_PASSWORD}", "XML", "zap-report.xml", "DVNA_ZAP", "zap_scan", "${properties.ARCHERYSEC_PROJECT_ID}")
                         }
                     }    
+                }
+            }
+        }
+
+        stage('Deploy App in Production') {
+            agent any
+
+            steps {
+                withKubeConfig([credentialsId: 'k8s-cluster-creds', serverUrl: "${properties.KUBERNETES_CLUSTER_URL}"]) {
+                    sh "sed -i 's/IMAGE_NAME/${properties.APP_NAME}/g' ${properties.PRODUCTION_KUSTOMIZATION_DIRECTORY}/kustomization.yaml"
+                    sh "sed -i 's/IMAGE_TAG/${BUILD_NUMBER}/g' ${properties.PRODUCTION_KUSTOMIZATION_DIRECTORY}/kustomization.yaml"
+                    script {
+                        deployUsingKustomize("${properties.PRODUCTION_NAMESPACE}", "${properties.PRODUCTION_KUSTOMIZATION_DIRECTORY}")
+                    }
                 }
             }
         }
