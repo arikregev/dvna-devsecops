@@ -32,7 +32,7 @@
     "indent": 4
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.1",
     "csurf": "^1.9.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
@@ -49,7 +49,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "sequelize": "^4.13.10",
-    "sqlite3": "^4.0.2",
+    "sqlite3": "^5.0.3",
     "winston": "^3.0.0",
     "x-xss-protection": "^1.1.0"
   }
