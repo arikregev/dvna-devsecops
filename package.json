@@ -34,7 +34,7 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "csurf": "^1.9.0",
-    "ejs": "^2.5.7",
+    "ejs": "^3.1.10",
     "express": "^4.16.2",
     "express-fileupload": "^0.4.0",
     "express-flash": "0.0.2",
